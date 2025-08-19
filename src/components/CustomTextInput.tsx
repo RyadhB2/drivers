@@ -44,22 +44,26 @@ export interface CustomInputFieldProps {
 const CustomInputField: React.FC<CustomInputFieldProps> = props => {
   return (
     <View style={[styles.mainContainer, props.containerStyle]}>
-      <Pressable
-        style={[styles.leftContainer, !props.onLeftPress ? { padding: 8 } : {}]}
-        onPress={props.onLeftPress}
-        disabled={!Boolean(props.left)}
-        android_ripple={
-          props.onLeftPress
-            ? {
-                ...styles.androidRippleDefaultStyle,
-                ...props.AndroidRippleConfig_Left,
-              }
-            : null
-        }
-      >
-        {props.left ? props.left() : null}
-      </Pressable>
-
+      {props.left ? (
+        <Pressable
+          style={[
+            styles.leftContainer,
+            !props.onLeftPress ? { padding: 8 } : {},
+          ]}
+          onPress={props.onLeftPress}
+          disabled={!Boolean(props.left)}
+          android_ripple={
+            props.onLeftPress
+              ? {
+                  ...styles.androidRippleDefaultStyle,
+                  ...props.AndroidRippleConfig_Left,
+                }
+              : null
+          }
+        >
+          {props.left ? props.left() : null}
+        </Pressable>
+      ) : null}
       <TextInput
         placeholder={props.placeholder}
         value={props.value}
@@ -76,25 +80,26 @@ const CustomInputField: React.FC<CustomInputFieldProps> = props => {
         onBlur={props.onBlur}
         contextMenuHidden={props.contextMenuHidden}
       />
-
-      <Pressable
-        style={[
-          styles.rightContainer,
-          !props.onRightPress ? { padding: 8 } : {},
-        ]}
-        onPress={props.onRightPress}
-        disabled={!Boolean(props.right)}
-        android_ripple={
-          props.onRightPress
-            ? {
-                ...styles.androidRippleDefaultStyle,
-                ...props.AndroidRippleConfig_Right,
-              }
-            : null
-        }
-      >
-        {props.right ? props.right() : null}
-      </Pressable>
+      {props.right ? (
+        <Pressable
+          style={[
+            styles.rightContainer,
+            !props.onRightPress ? { padding: 8 } : {},
+          ]}
+          onPress={props.onRightPress}
+          disabled={!Boolean(props.right)}
+          android_ripple={
+            props.onRightPress
+              ? {
+                  ...styles.androidRippleDefaultStyle,
+                  ...props.AndroidRippleConfig_Right,
+                }
+              : null
+          }
+        >
+          {props.right ? props.right() : null}
+        </Pressable>
+      ) : null}
     </View>
   );
 };
