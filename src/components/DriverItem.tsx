@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Driver } from '../models/drivers';
+import { colors } from '../theme/colors';
 
 interface DriverItemProps {
   driver: Driver;
@@ -16,9 +17,9 @@ const DriverItem: React.FC<DriverItemProps> = ({
       <Text style={styles.name}>{full_name}</Text>
       <Text style={styles.phone}>{phone}</Text>
       <View style={styles.lowerContainer}>
-        <Text>{reference}</Text>
+        <Text style={styles.reference}>{reference}</Text>
         <Pressable onPress={onTransferCredit} style={styles.button}>
-          <Text style={{ color: 'white' }}>Créditer</Text>
+          <Text style={{ color: colors.black }}>Créditer</Text>
         </Pressable>
       </View>
     </View>
@@ -33,10 +34,18 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
+    color: colors.white,
+    marginBottom: 6,
   },
   phone: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: colors.white,
+    marginBottom: 6,
+  },
+  reference: {
+    fontSize: 16,
+    color: colors.white,
   },
 
   lowerContainer: {
@@ -45,8 +54,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    padding: 10,
-    backgroundColor: '#007BFF',
+    padding: 8,
+    backgroundColor: '#F2D54E',
     borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

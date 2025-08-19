@@ -87,15 +87,17 @@ const HomeScreen: React.FC = () => {
   const renderEmptyList = useCallback(() => {
     return (
       <View>
-        <Text style={{ textAlign: 'center', marginTop: 20 }}>
-          Aucun chauffeur trouvé
-        </Text>
-        <Text style={{ textAlign: 'center', marginTop: 10 }}>
+        <Text style={styles.emptyListTextTitle}>Aucun chauffeur trouvé</Text>
+        <Text style={styles.emptyListTextSubtitle}>
           Verifiez le nom, le numéro ou la référence saisis
         </Text>
       </View>
     );
   }, [isLoadingMore]);
+
+  const renderHeader = useCallback(() => {
+    return <Text style={styles.listHeaderText}>Liste des chauffeurs</Text>;
+  }, []);
 
   const handleRefresh = useCallback(async () => {
     try {
@@ -128,9 +130,9 @@ const HomeScreen: React.FC = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       style={{ flex: 1 }}
     >
-      <View style={{ flex: 1, backgroundColor: colors.white }}>
-        <Text>Rechercher un chauffeur</Text>
-        <Text>
+      <View style={styles.mainContainer}>
+        <Text style={styles.title}>Rechercher un chauffeur</Text>
+        <Text style={styles.subTitle}>
           Saisissez le nom,le numéro ou la réference du chauffeur pour lui
           transferer du crédit
         </Text>
@@ -139,6 +141,8 @@ const HomeScreen: React.FC = () => {
           left={() => <Text>🔍</Text>}
           placeholder="Ex: Mourad, 0550, CH-152 ..."
           containerStyle={styles.inputContainer}
+          inputStyle={styles.textInputStyle}
+          placeholderTextColor={colors.white}
           onChangeText={text => setSearchQuery(text)}
           value={searchQuery}
         />
@@ -153,6 +157,7 @@ const HomeScreen: React.FC = () => {
             ItemSeparatorComponent={renderSeparator}
             onEndReached={handleLoadMore}
             onEndReachedThreshold={0.3}
+            ListHeaderComponent={renderHeader}
             ListFooterComponent={renderFooter}
             ListEmptyComponent={renderEmptyList}
             refreshing={refreshing}
